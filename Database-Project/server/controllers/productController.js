@@ -4,7 +4,6 @@ import Product from "../models/product.js"
 //Add Product: /api/product/add
 export const addProduct = async (req, res) => {
     try {
-        I
         let productData = JSON.parse(req.body.productData)
         const images = req.files
         let imagesUrl = await Promise.all(
