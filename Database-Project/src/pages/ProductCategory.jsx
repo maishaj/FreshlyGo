@@ -10,7 +10,17 @@ const ProductCategory = () => {
     const {category}=useParams();
 
     const searchCategory=categories.find((item)=>item.path.toLowerCase()===category)
-    const filteredProducts=products.filter((product)=>product.category.toLowerCase()===category)
+    // const filteredProducts=products.filter((product)=>product.category.toLowerCase()===category)
+
+    
+ const filteredProducts = products.filter((product) => {
+    if (typeof product.category === "string") {
+      return product.category.toLowerCase() === category;
+    } else if (product.category && typeof product.category.name === "string") {
+      return product.category.name.toLowerCase() === category;
+    }
+    return false;
+  });
 
 
     return (

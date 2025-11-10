@@ -1,20 +1,33 @@
 import React from 'react';
 import { useAppContext } from '../context/AppContext';
+import toast from 'react-hot-toast';
 
 const Login = () => {
     const [state, setState] = React.useState("login");
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const {setShowUserLogin,setuser}=useAppContext();
+    const {setShowUserLogin,setUser,axios,navigate}=useAppContext();
 
     const onSubmitHandler=async(event)=>{
-        event.preventDefault();     //it will stop the page from reloading
-        setuser({
-            email:"db@gmail.com",
-            name:"groceryShop"
-        })
-        setShowUserLogin(false);
+
+        try{
+   event.preventDefault(); 
+     const {data} = await axios.post(`/api/user/${state}`,{
+        name,email,password
+     });
+
+     if(data.success){
+            navigate('/')
+            setUser(data.user)
+             setShowUserLogin(false);  
+     }else{
+           toast.error(data.message)
+     }
+        }catch(error){
+          toast.error(error.message)
+        }
+       
     }
 
     return (
