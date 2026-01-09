@@ -253,7 +253,7 @@ const Cart = () => {
             className="w-full border border-gray-300 bg-white px-3 py-2 mt-2 outline-none"
           >
             <option value="COD">Cash On Delivery</option>
-            <option value="Online">Online Payment</option>
+            {/* <option value="Online">Online Payment</option> */}
           </select>
         </div>
 
@@ -272,7 +272,7 @@ const Cart = () => {
             <span className="text-green-600">Free</span>
           </p>
           <p className="flex justify-between">
-            <span>Tax (2%)</span>
+            <span>VAT (2%)</span>
             <span>
               {currency}
               {(getCartAmount() * 20) / 100}
